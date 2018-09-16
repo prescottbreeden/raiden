@@ -1,5 +1,5 @@
-class Background {
-	constructor(src, canvas) {
+class Cloud {
+	constructor(canvas) {
 		this.canvas = canvas;
 		this.context = this.canvas.getContext('2d');
 
@@ -8,7 +8,7 @@ class Background {
 		this.w = 200;
 		this.x = getRandomInt(0, this.canvas.width-this.w);
 		this.y = 0 - this.h;
-		this.src = src;
+		this.src = 'public/images/clouds.png';
 		this.img = null;
 
 		this.create();
@@ -16,7 +16,7 @@ class Background {
 
 	create() {
 		this.img = new Image();
-		this.img.src = this.src();
+		this.img.src = this.src;
 	}
 
 	draw() {
