@@ -34,6 +34,12 @@ class Player {
 				this.y = 0;
 			}
 
+			if(this.x + this.w > this.canvas.width) {
+				this.x = this.canvas.width - this.w;
+			} else if(this.x < 0) {
+				this.x = 0;
+			}
+
 			this.context.drawImage(this.img, this.x, this.y, this.w, this.h);
 		}
 	}

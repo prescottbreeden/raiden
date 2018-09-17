@@ -147,6 +147,7 @@ class Game {
 
 	}
 
+
 	drawBullets() {
 		const bullets = this.bulletFactory.bullets;
 		for(let i = 0; i < bullets.length; i++) {
@@ -156,6 +157,7 @@ class Game {
 		this.removeExtraBullets();
 	}
 
+
 	removeExtraBullets() {
 		const bullets = this.bulletFactory.bullets;
 		for(let i = 0; i < bullets.length; i++) {
@@ -164,6 +166,7 @@ class Game {
 			}
 		}
 	}
+
 
 	drawClouds() {
 		const clouds = this.cloudFactory.clouds;
@@ -193,8 +196,6 @@ class Game {
 	reset() {
 
 	}
-
-
 
 
 	ceaseFire() {
