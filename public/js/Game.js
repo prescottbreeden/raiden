@@ -79,6 +79,7 @@ class Game {
 		this.cloudFactory = new CloudFactory(this.canvas);
 		this.player = new Player('public/images/mship1.png', this.canvas);
 		this.bulletFactory = new BulletFactory(this.canvas, this.player);
+		this.enemyFactory = new EnemyFactory(this.canvas);
 	}
 
 
@@ -116,8 +117,10 @@ class Game {
 		this.animateBackground();
 
 		// draw clouds
+		this.checkCollisions();
 		this.drawClouds();
 		this.drawBullets();
+		this.drawEnemies();
 
 		// draw player
 		this.player.draw();
@@ -145,6 +148,32 @@ class Game {
 	
 	animateBackground() {
 
+	}
+
+
+	drawEnemies() {
+		const enemies = this.enemyFactory.enemies;
+		for(let i = 0; i < enemies.length; i++) {
+			enemies[i].draw();
+			enemies[i].y += enemies[i].vy;
+		}
+		this.removeExtraEnemies();
+	}
+
+
+	removeExtraEnemies() {
+		const enemies = this.enemyFactory.enemies;
+		for(let i = 0; i < enemies.length; i++) {
+			if(enemies[i].y > this.canvas.height) {
+				enemies.shift();
+			}
+		}
+		const bullets = this.bulletFactory.bullets;
+		for(let i = 0; i < bullets.length; i++) {
+			if(bullets[i].y > this.canvas.height) {
+				bullets.shift();
+			}
+		}
 	}
 
 
@@ -189,7 +218,27 @@ class Game {
 
 
 	checkCollisions() {
+		const bullets = this.bulletFactory.bullets;
+		const enemies = this.enemyFactory.enemies;
+		for(let i = 0; i < bullets.length; i++) {
+			for(let j = 0; j < enemies.length; j++) {
+				const enemyStartY = enemies[j].y;
+				const enemyStartX = enemies[j].x;
+				const enemyEndY = enemies[j].y + enemies[j].h;;
+				const enemyEndX = enemies[j].x + enemies[j].w;
+				const bulletStartY = bullets[i].y;
+				const bulletEndY = bullets[i].y +bullets[i].h;
+				const bulletEndX = bullets[i].x + bullets[i].w;
+				const bulletStartX = bullets[i].x;
 
+				if(bulletStartX >= enemyStartX && bulletStartX <= enemyEndX) {
+					if(bulletStartY >= enemyStartY && bulletStartY <= enemyEndY) {
+						bullets.splice(i, 1);
+						enemies.splice(j, 1);
+					}
+				}
+			}
+		}
 	}
 
 
@@ -215,6 +264,7 @@ class Game {
 	bindEvents() {
 		let down = false;
 		let game = this;
+
 		window.addEventListener('keyup', function(e) {
 			if(game.getState() === GAME_PLAYING) {
 				switch(e.keyCode) {
@@ -236,6 +286,7 @@ class Game {
 				}
 			}
 		})
+
 		window.addEventListener('keydown', function(e) {
 			if(game.getState() === GAME_PLAYING) {
 				switch(e.keyCode) {
@@ -262,6 +313,7 @@ class Game {
 		game.canvas.addEventListener('click', function(e) {
 			game.cloudFactory.generateClouds();
 			game.setState(GAME_PLAYING);
+			game.enemyFactory.createAllEnemies();
 		})
 
 	}
