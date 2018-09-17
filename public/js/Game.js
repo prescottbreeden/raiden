@@ -233,6 +233,9 @@ class Game {
 
 				if(bulletStartX >= enemyStartX && bulletStartX <= enemyEndX) {
 					if(bulletStartY >= enemyStartY && bulletStartY <= enemyEndY) {
+						const hit = new Audio();
+						hit.src = 'public/music/explosion1.mp3';
+						hit.play();
 						bullets.splice(i, 1);
 						enemies.splice(j, 1);
 					}
