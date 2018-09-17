@@ -35,6 +35,14 @@ class Game {
 		this.getMusic = () => this._music;
 		this.toggleMusic = () => this._music = !this._music;
 
+		this.pewpew = () => {
+			console.log('pew pew');
+			const pew = new Audio();
+			pew.src = 'public/music/blaster.mp3';
+			pew.play();
+			this.bulletFactory.generateBullets();
+		}
+
 		// bind event listeners
 		this.bindEvents();
 
@@ -70,6 +78,7 @@ class Game {
 	createObjects() {
 		this.cloudFactory = new CloudFactory(this.canvas);
 		this.player = new Player('public/images/mship1.png', this.canvas);
+		this.bulletFactory = new BulletFactory(this.canvas, this.player);
 	}
 
 
@@ -108,6 +117,7 @@ class Game {
 
 		// draw clouds
 		this.drawClouds();
+		this.drawBullets();
 
 		// draw player
 		this.player.draw();
@@ -137,6 +147,23 @@ class Game {
 
 	}
 
+	drawBullets() {
+		const bullets = this.bulletFactory.bullets;
+		for(let i = 0; i < bullets.length; i++) {
+			bullets[i].draw();
+			bullets[i].y += bullets[i].vy;
+		}
+		this.removeExtraBullets();
+	}
+
+	removeExtraBullets() {
+		const bullets = this.bulletFactory.bullets;
+		for(let i = 0; i < bullets.length; i++) {
+			if(bullets[i].y > this.canvas.height) {
+				bullets.shift();
+			}
+		}
+	}
 
 	drawClouds() {
 		const clouds = this.cloudFactory.clouds;
@@ -168,13 +195,25 @@ class Game {
 	}
 
 
+
+
+	ceaseFire() {
+		clearInterval(this.playerFire);
+	}
+
+
+	shoot() {
+		this.playerFire = setInterval(this.pewpew, 150);
+	}
+
+
 	// ============================ //
 	// ===== EVENT LISTENERS ====== //
 	// ============================ //
 	
 	bindEvents() {
+		let down = false;
 		let game = this;
-		console.log('balls');
 		window.addEventListener('keyup', function(e) {
 			if(game.getState() === GAME_PLAYING) {
 				switch(e.keyCode) {
@@ -191,8 +230,8 @@ class Game {
 						if(game.player.vy > 0) {game.player.vy = 0;}
 						break;
 					case KEY_CODE.spacebar:
-						game.player.weaponsArmed = false;
-						console.log('stop firing!');
+						game.ceaseFire();
+						down = false;
 				}
 			}
 		})
@@ -212,17 +251,13 @@ class Game {
 						game.player.vy = 5;
 						break;
 					case KEY_CODE.spacebar:
-						game.player.weaponsArmed = true;
-						console.log('keep firing assholes!');
+						if(down) return;
+						down = true;
+						game.shoot();
 				}
 			}
 		})
-		window.addEventListener('keyup', function(e) {
-			if(e.keyCode === KEY_CODE.spacebar) {
-				// game.player.generateBullets();
-				game.player.playerFire = false;
-			}
-		})
+
 		game.canvas.addEventListener('click', function(e) {
 			game.cloudFactory.generateClouds();
 			game.setState(GAME_PLAYING);

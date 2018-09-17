@@ -14,10 +14,8 @@ class Player {
 		this.img = null;
 		this.weaponType = 'blaster';
 		this.weaponStr = 1;
-		this.weaponsArmed = false;
 
 		this.create();
-		this.shoot();
 	}
 
 	create() {
@@ -40,14 +38,4 @@ class Player {
 		}
 	}
 
-	shoot() {
-			if(this.weaponsArmed) {
-				setInterval(function() {
-					console.log('pew pew');
-					const pew = new Audio();
-					pew.src = 'public/music/blaster.mp3';
-					pew.play();
-				}, 1000)
-			}
-	}
 }

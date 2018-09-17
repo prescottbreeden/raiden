@@ -5,7 +5,7 @@ class Cloud {
 
 		// specs
 		this.h = 200;
-		this.w = 200;
+		this.w = 300;
 		this.x = getRandomInt(0, this.canvas.width-this.w);
 		this.y = 0 - this.h;
 		this.src = 'public/images/clouds.png';
