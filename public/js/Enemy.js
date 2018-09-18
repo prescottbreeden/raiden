@@ -6,40 +6,61 @@ class Enemy {
 		this.playerPosition = getPosition(game.player);
 
 		// specs
+		console.log(src);
 		
 		// blackbird enemy
 		if(src === 'blackbird') {
 			this.tracking = true;
+			this.contain = false;
+			this.spin = false;
 			this.h = 100;
 			this.w = 100;
 			this.r = this.w/2.1;
-			this.x = this.canvas.width/2 + this.w/2;
-			this.y = 0 - this.h;
+			this.x = getRandomInt(this.canvas.width*.1, this.canvas.width*.9);
+			this.y = -this.h;
+			this.weaponSpeed = 8;
 			this.vy = game.getVelocity() * 8;
 			this.g = -.05;
-			this.vx = 1;
+			if(this.x >= this.canvas.width/2) {
+				this.vx = 1;
+			} else {
+				this.vx = -1;
+			}
 			this.src = 'public/images/'+src+'.png';
 			this.img = null;
 			this.weaponType = 'ball';
 			this.fireDelay = 1000;
 			this.hp = 10;
+			this.shoot(this.fireDelay);
+			this.shoot(this.fireDelay*2);
+		}
 
-			this.shoot = () => {
-				let game = this.game;
-				let enemy = this;
-				setTimeout(function() {
-					if(enemy.hp <= 0) { return; }
-					const pew = new Audio();
-					pew.src = 'public/music/retro-shot-blaster.mp3';
-					pew.play();
-					const bullet = new Bullet(game, enemy);
-					game.bulletFactory.bullets.push(bullet);
-				}, enemy.fireDelay)}
+		if(src === 'spacestation') {
+			this.tracking = false;
+			this.contain = true;
+			this.spin = true;
+			this.h = 120;
+			this.w = 120;
+			this.r = this.w/2;
+			this.x = getRandomInt(this.canvas.width*.1, this.canvas.width*.9);
+			this.y = -this.h;
+			this.g = 0;
+			this.vy = game.getVelocity() * 2;
+			this.vx = 1; 
+			this.weaponSpeed = 5;
+
+			this.src = 'public/images/'+src+'.png';
+			this.img = null;
+			this.weaponType = 'ball';
+			this.fireDelay = 2000;
+			this.hp = 500;
+			this.shoot(this.fireDelay);
+			this.shoot(this.fireDelay);
+			this.shoot(this.fireDelay);
 		}
 
 		this.angle = Math.atan2(this.playerPosition.y - this.y, this.playerPosition.x - this.x) - 3.141 / 2;
 		this.create();
-		this.shoot();
 	}
 
 
@@ -48,7 +69,23 @@ class Enemy {
 		this.img.src = this.src;
 	}
 
+	shoot(delay) {
+		let game = this.game;
+		let enemy = this;
+		setTimeout(function() {
+			if(enemy.hp <= 0) { return; }
+			const pew = new Audio();
+			pew.src = 'public/music/retro-shot-blaster.mp3';
+			pew.play();
+			const bullet = new Bullet(game, enemy);
+			const player = getPosition(game.player);
+			const distance = getDistance(game.player, enemy);
+			bullet.vx = (player.x - enemy.x)/distance*enemy.weaponSpeed;
+			bullet.vy = (player.y - enemy.y)/distance*enemy.weaponSpeed;
+			game.bulletFactory.bullets.push(bullet);
+		}, delay)
 
+	}
 
 
 	draw() {
@@ -56,12 +93,37 @@ class Enemy {
 		this.vy += this.g;
 		this.y += this.vy;
 		this.x += this.vx;
+
+		if(this.contain) {
+			if(this.y+this.h > this.canvas.height && this.vy > 0) { 
+				this.y = this.canvas.height-this.h;
+				this.vy *= -1;
+			}
+			if(this.y < this.h/2 && this.vy < 0) { 
+				this.y = this.h/2;
+				this.vy *= -1;
+			}
+			if(this.x < this.w/2 && this.vx < 0) {
+				this.x = this.w/2;
+				this.vx *= -1;
+			}
+			if(this.x + this.w/2 > this.canvas.width && this.vx > 0) {
+				this.x = this.canvas.width - this.w/2;
+				this.vx *= -1;
+			}
+		}
+
 		this.context.translate(this.x, this.y);
 
 		if(this.tracking) {
 			this.playerPosition = getPosition(this.game.player);
 			this.angle = Math.atan2(this.playerPosition.y - this.y, this.playerPosition.x - this.x) - 3.141 / 2;
-			this.context.rotate(this.angle)
+			this.context.rotate(this.angle);
+		}
+
+		if(this.spin) {
+			this.angle+=5; 
+			this.context.rotate(this.angle);
 		}
 		
 		this.context.drawImage(this.img, -(this.w/2), -(this.h/2), this.h, this.w);

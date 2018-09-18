@@ -12,6 +12,7 @@ class Bullet {
 		if(ship.weaponType === 'blaster') {
 			this.class = 'player';
 			this.vy = -20;
+			this.vx = 0;
 			if(ship.weaponStr === 1) {
 				this.h = 50;
 				this.w = 5;
@@ -64,6 +65,8 @@ class Bullet {
 	}
 
 	draw() {
+		this.x += this.vx;
+		this.y += this.vy;
 		this.context.fillStyle = 'blue';
 		this.context.fillRect(this.x, this.y, this.w, this.h);
 	}

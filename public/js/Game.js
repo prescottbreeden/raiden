@@ -178,7 +178,6 @@ class Game {
 		const bullets = this.bulletFactory.bullets;
 		for(let i = 0; i < bullets.length; i++) {
 			bullets[i].draw();
-			bullets[i].y += bullets[i].vy;
 		}
 		this.removeExtraBullets();
 	}
