@@ -81,6 +81,7 @@ class Game {
 		this.player = new Player('public/images/mship1.png', this.canvas);
 		this.bulletFactory = new BulletFactory(this, this.player);
 		this.enemyFactory = new EnemyFactory(this);
+		this.explosionFactory = new ExplosionFactory(this);
 	}
 
 
@@ -122,6 +123,7 @@ class Game {
 		this.drawClouds();
 		this.drawBullets();
 		this.drawEnemies();
+		this.drawExplosions();
 
 		// draw player
 		this.player.update();
@@ -161,16 +163,12 @@ class Game {
 		this.removeExtraEnemies();
 	}
 
-	rotateEnemies(enemy) {
-
-	}
 
 	removeExtraEnemies() {
 		const enemies = this.enemyFactory.enemies;
 		for(let i = 0; i < enemies.length; i++) {
 			if(enemies[i].y > this.canvas.height || enemies[i].y < -2*enemies[i].h) {
 				enemies.splice(i, 1);
-				console.log(enemies);
 			}
 		}
 	}
@@ -230,6 +228,7 @@ class Game {
 						hit.src = 'public/music/explosion1.mp3';
 						hit.play();
 						bullets.splice(i, 1);
+						this.explosionFactory.generateExplosions(enemy);
 						enemies.splice(j, 1);
 				}
 				
@@ -250,6 +249,17 @@ class Game {
 			}
 		}
 
+	}
+
+
+	drawExplosions() {
+		const explosions = this.explosionFactory.explosions;
+		for(let i = 0; i < explosions.length; i++) {
+			const explosion = explosions[i];
+			explosion.draw();
+			if(explosion.row + explosion.col === 15) { explosions.splice(i, 1); }
+		}
+		
 	}
 
 	reset() {
