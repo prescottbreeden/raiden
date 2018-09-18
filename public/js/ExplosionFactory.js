@@ -8,7 +8,6 @@ class ExplosionFactory {
 
 
 	generateExplosions(enemy) {
-		console.log(enemy);
 		const explosion = new Explosion(this.game, enemy);
 		this.explosions.push(explosion);
 	}

@@ -10,7 +10,8 @@ class Bullet {
 		// ---------------------- //
 		
 		if(ship.weaponType === 'blaster') {
-				this.vy = -20;
+			this.class = 'player';
+			this.vy = -20;
 			if(ship.weaponStr === 1) {
 				this.h = 50;
 				this.w = 5;
@@ -51,9 +52,13 @@ class Bullet {
 		// --------------------- //
 
 		if(ship.weaponType === 'ball') {
-			this.vy = 1;
-			this.x = ship.x + ship.w/2 - this.w/2;
-			this.y = ship.y + ship.h;
+			this.class = 'enemy';
+			this.vy = ship.vy;
+			this.vx = ship.vx;
+			this.x = ship.x;
+			this.y = ship.y;
+			this.w = 10;
+			this.h = 10;
 		
 		}
 	}

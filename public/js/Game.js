@@ -222,14 +222,18 @@ class Game {
 			for(let j = 0; j < enemies.length; j++) {
 				const enemy = enemies[j];
 				const bullet = bullets[i];
+				if(bullet.class != 'player') { continue; }
 				const checkPlayerBullets = getDistance(enemy, getPosition(bullet));
 				if(checkPlayerBullets < enemy.r) {
+					enemy.hp -= bullet.power;
+					if(enemy.hp <= 0) {
 						const hit = new Audio();
 						hit.src = 'public/music/explosion1.mp3';
 						hit.play();
 						bullets.splice(i, 1);
 						this.explosionFactory.generateExplosions(enemy);
 						enemies.splice(j, 1);
+					}
 				}
 				
 			}

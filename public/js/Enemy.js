@@ -1,7 +1,7 @@
 class Enemy {
 	constructor(src, game) {
-		this.canvas = game.canvas;
 		this.game = game;
+		this.canvas = game.canvas;
 		this.context = game.context;
 		this.playerPosition = getPosition(game.player);
 
@@ -20,10 +20,26 @@ class Enemy {
 			this.vx = 1;
 			this.src = 'public/images/'+src+'.png';
 			this.img = null;
+			this.weaponType = 'ball';
+			this.fireDelay = 1000;
+			this.hp = 10;
+
+			this.shoot = () => {
+				let game = this.game;
+				let enemy = this;
+				setTimeout(function() {
+					if(enemy.hp <= 0) { return; }
+					const pew = new Audio();
+					pew.src = 'public/music/retro-shot-blaster.mp3';
+					pew.play();
+					const bullet = new Bullet(game, enemy);
+					game.bulletFactory.bullets.push(bullet);
+				}, enemy.fireDelay)}
 		}
 
 		this.angle = Math.atan2(this.playerPosition.y - this.y, this.playerPosition.x - this.x) - 3.141 / 2;
 		this.create();
+		this.shoot();
 	}
 
 
@@ -31,6 +47,8 @@ class Enemy {
 		this.img = new Image();
 		this.img.src = this.src;
 	}
+
+
 
 
 	draw() {
