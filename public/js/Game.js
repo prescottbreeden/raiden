@@ -1,3 +1,4 @@
+const radian = Math.PI/180;
 const INITIAL = 1;
 const GAME_PLAYING = 2;
 const GAME_OVER = 3;
@@ -124,7 +125,7 @@ class Game {
 		this.drawEnemies();
 
 		// draw player
-		this.player.draw();
+		this.player.update();
 	}
 
 
@@ -168,8 +169,9 @@ class Game {
 	removeExtraEnemies() {
 		const enemies = this.enemyFactory.enemies;
 		for(let i = 0; i < enemies.length; i++) {
-			if(enemies[i].y > this.canvas.height) {
-				enemies.shift();
+			if(enemies[i].y > this.canvas.height || enemies[i].y < -2*enemies[i].h) {
+				enemies.splice(i, 1);
+				console.log(enemies);
 			}
 		}
 	}
@@ -189,7 +191,7 @@ class Game {
 		const bullets = this.bulletFactory.bullets;
 		for(let i = 0; i < bullets.length; i++) {
 			if(bullets[i].y > this.canvas.height) {
-				bullets.shift();
+				bullets.splice(i, 1);
 			}
 		}
 	}

@@ -15,8 +15,9 @@ class Enemy {
 			this.r = this.w/1.8;
 			this.x = this.canvas.width/2 + this.w/2;
 			this.y = 0 - this.h;
-			this.vy = game.getVelocity() * 1.5;
-			this.vx = 0;
+			this.vy = game.getVelocity() * 8;
+			this.g = -.05;
+			this.vx = 1;
 			this.src = 'public/images/'+src+'.png';
 			this.img = null;
 		}
@@ -34,6 +35,7 @@ class Enemy {
 
 	draw() {
 		this.context.save();
+		this.vy += this.g;
 		this.y += this.vy;
 		this.x += this.vx;
 		this.context.translate(this.x, this.y);
