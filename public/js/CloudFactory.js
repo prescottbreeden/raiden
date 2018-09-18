@@ -3,7 +3,7 @@ class CloudFactory {
 		this.canvas = canvas;
 		this.context = this.canvas.getContext('2d');
 
-		this.minFreq = 3000;
+		this.minFreq = 2000;
 		this.maxFreq = 5000;
 		this.clouds = [];
 	}

@@ -1,9 +1,14 @@
 class Bullet {
-	constructor(canvas, ship) {
-		this.canvas = canvas;
-		this.context = this.canvas.getContext('2d');
+	constructor(game, ship) {
+		this.canvas = game.canvas;
+		this.context = game.context;
 
 		// specs
+		
+		// ---------------------- //
+		// --- PLAYER WEAPONS --- //
+		// ---------------------- //
+		
 		if(ship.weaponType === 'blaster') {
 				this.vy = -20;
 			if(ship.weaponStr === 1) {
@@ -37,6 +42,19 @@ class Bullet {
 				this.y = ship.y;
 				this.power = ship.weaponStr * 10;
 			}
+		}
+
+
+
+		// --------------------- //
+		// --- ENEMY WEAPONS --- //
+		// --------------------- //
+
+		if(ship.weaponType === 'ball') {
+			this.vy = 1;
+			this.x = ship.x + ship.w/2 - this.w/2;
+			this.y = ship.y + ship.h;
+		
 		}
 	}
 

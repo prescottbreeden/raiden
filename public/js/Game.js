@@ -18,7 +18,7 @@ const KEY_CODE = {
 class Game {
 	constructor(canvas) {
 		this._currentState = INITIAL;
-		this._velocity = 2;
+		this._velocity = 1;
 		this._music = false;
 		this.canvas = canvas;
 		this.context = this.canvas.getContext('2d');
@@ -78,8 +78,8 @@ class Game {
 	createObjects() {
 		this.cloudFactory = new CloudFactory(this.canvas);
 		this.player = new Player('public/images/mship1.png', this.canvas);
-		this.bulletFactory = new BulletFactory(this.canvas, this.player);
-		this.enemyFactory = new EnemyFactory(this.canvas);
+		this.bulletFactory = new BulletFactory(this, this.player);
+		this.enemyFactory = new EnemyFactory(this);
 	}
 
 
@@ -112,6 +112,7 @@ class Game {
 
 		// clear canvas
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		// this.canvas.width = this.canvas.width;
 
 		// animate background
 		this.animateBackground();
@@ -154,24 +155,21 @@ class Game {
 	drawEnemies() {
 		const enemies = this.enemyFactory.enemies;
 		for(let i = 0; i < enemies.length; i++) {
-			enemies[i].draw();
-			enemies[i].y += enemies[i].vy;
+			const enemy = enemies[i];
+			enemy.draw();
 		}
 		this.removeExtraEnemies();
 	}
 
+	rotateEnemies(enemy) {
+
+	}
 
 	removeExtraEnemies() {
 		const enemies = this.enemyFactory.enemies;
 		for(let i = 0; i < enemies.length; i++) {
 			if(enemies[i].y > this.canvas.height) {
 				enemies.shift();
-			}
-		}
-		const bullets = this.bulletFactory.bullets;
-		for(let i = 0; i < bullets.length; i++) {
-			if(bullets[i].y > this.canvas.height) {
-				bullets.shift();
 			}
 		}
 	}
@@ -294,16 +292,16 @@ class Game {
 			if(game.getState() === GAME_PLAYING) {
 				switch(e.keyCode) {
 					case KEY_CODE.left:
-						game.player.vx = -5;
+						game.player.vx = -4.5;
 						break;
 					case KEY_CODE.up:
-						game.player.vy = -5;
+						game.player.vy = -4.5;
 						break;
 					case KEY_CODE.right:
-						game.player.vx = 5;
+						game.player.vx = 4.5;
 						break;
 					case KEY_CODE.down:
-						game.player.vy = 5;
+						game.player.vy = 4.5;
 						break;
 					case KEY_CODE.spacebar:
 						if(down) return;

@@ -1,7 +1,8 @@
 class BulletFactory {
-	constructor(canvas, ship) {
-		this.canvas = canvas;
-		this.context = this.canvas.getContext('2d');
+	constructor(game, ship) {
+		this.game = game;
+		this.canvas = game.canvas;
+		this.context = game.context;
 		this.ship = ship;
 
 		this.bullets = [];
@@ -9,7 +10,7 @@ class BulletFactory {
 	}
 
 	generateBullets(interval) {
-		const bullet = new Bullet(this.canvas, this.ship);
+		const bullet = new Bullet(this.game, this.ship);
 		this.bullets.push(bullet);
 	}
 }

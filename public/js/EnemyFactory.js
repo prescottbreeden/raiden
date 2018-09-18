@@ -1,19 +1,19 @@
 class EnemyFactory {
-	constructor(canvas) {
-		this.canvas = canvas;
-		console.log(this.canvas);
+	constructor(game) {
+		this.game = game;
+		this.canvas = game.canvas;
 
 		this.enemies = [];
 		this.createAllEnemies();
 
 		this.addEnemy = () => {
-			const enemy = new Enemy('public/images/black.png', this.canvas);
+			const enemy = new Enemy('blackbird', this.game);
 			this.enemies.push(enemy);
 		}
 
 	}
 
 	createAllEnemies() {
-		setInterval(this.addEnemy, 3000);
+		setInterval(this.addEnemy, 4000);
 	}
 }
