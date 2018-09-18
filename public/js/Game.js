@@ -82,6 +82,7 @@ class Game {
 		this.bulletFactory = new BulletFactory(this, this.player);
 		this.enemyFactory = new EnemyFactory(this);
 		this.explosionFactory = new ExplosionFactory(this);
+		this.itemFactory = new ItemFactory(this);
 	}
 
 
@@ -124,6 +125,7 @@ class Game {
 		this.drawBullets();
 		this.drawEnemies();
 		this.drawExplosions();
+		this.drawItems();
 
 		// draw player
 		this.player.update();
@@ -231,6 +233,7 @@ class Game {
 						hit.play();
 						bullets.splice(i, 1);
 						this.explosionFactory.generateExplosions(enemy);
+						this.itemFactory.generateItem(enemy);
 						enemies.splice(j, 1);
 					}
 				}
@@ -263,6 +266,14 @@ class Game {
 			if(explosion.row + explosion.col === 15) { explosions.splice(i, 1); }
 		}
 		
+	}
+
+	drawItems() {
+		const items = this.itemFactory.items;
+		for(let i = 0; i < items.length; i++) {
+			const item = items[i];
+			item.draw();
+		}
 	}
 
 	reset() {
