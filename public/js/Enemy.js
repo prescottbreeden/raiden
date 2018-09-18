@@ -11,8 +11,8 @@ class Enemy {
 		if(src === 'blackbird') {
 			this.tracking = true;
 			this.h = 100;
-			this.w = 90;
-			this.r = this.w/1.8;
+			this.w = 100;
+			this.r = this.w/2.1;
 			this.x = this.canvas.width/2 + this.w/2;
 			this.y = 0 - this.h;
 			this.vy = game.getVelocity() * 8;
@@ -47,13 +47,15 @@ class Enemy {
 		}
 		
 		this.context.drawImage(this.img, -(this.w/2), -(this.h/2), this.h, this.w);
-		this.context.beginPath();
-		this.context.arc(0, 0, this.r, 0, 2 * Math.PI, false);
-		this.context.strokeStyle = 'black';
-		this.context.fillStyle = 'rgba(0, 0, 0, .2)';
-		this.context.lineWidth = 2;
-		this.context.stroke();
-		this.context.fill();
+
+		// this.context.beginPath();
+		// this.context.arc(0, 0, this.r, 0, 2 * Math.PI, false);
+		// this.context.strokeStyle = 'black';
+		// this.context.fillStyle = 'rgba(0, 0, 0, .2)';
+		// this.context.lineWidth = 2;
+		// this.context.stroke();
+		// this.context.fill();
+
 		this.context.restore();
 
 	}

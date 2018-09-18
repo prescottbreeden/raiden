@@ -110,7 +110,6 @@ class Game {
 			this.soundtrack = new Sound('public/music/soundtrack.mp3');
 		}
 
-
 		// clear canvas
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		// this.canvas.width = this.canvas.width;
@@ -218,32 +217,40 @@ class Game {
 
 
 	checkCollisions() {
+		this.checkSuicides();
 		const bullets = this.bulletFactory.bullets;
 		const enemies = this.enemyFactory.enemies;
 		for(let i = 0; i < bullets.length; i++) {
 			for(let j = 0; j < enemies.length; j++) {
-				const enemyStartY = enemies[j].y;
-				const enemyStartX = enemies[j].x;
-				const enemyEndY = enemies[j].y + enemies[j].h;;
-				const enemyEndX = enemies[j].x + enemies[j].w;
-				const bulletStartY = bullets[i].y;
-				const bulletEndY = bullets[i].y +bullets[i].h;
-				const bulletEndX = bullets[i].x + bullets[i].w;
-				const bulletStartX = bullets[i].x;
-
-				if(bulletStartX >= enemyStartX && bulletStartX <= enemyEndX) {
-					if(bulletStartY >= enemyStartY && bulletStartY <= enemyEndY) {
+				const enemy = enemies[j];
+				const bullet = bullets[i];
+				const checkPlayerBullets = getDistance(enemy, getPosition(bullet));
+				if(checkPlayerBullets < enemy.r) {
 						const hit = new Audio();
 						hit.src = 'public/music/explosion1.mp3';
 						hit.play();
 						bullets.splice(i, 1);
 						enemies.splice(j, 1);
-					}
 				}
+				
 			}
 		}
 	}
 
+	checkSuicides() {
+		const enemies = this.enemyFactory.enemies;
+		for(let i = 0; i < enemies.length; i++) {
+			const enemy = enemies[i];
+			const distance = getDistance(enemy, this.player.position);
+			if(distance < enemy.r) {
+				const hit = new Audio();
+				hit.src = 'public/music/explosion1.mp3';
+				hit.play();
+				this.setState(GAME_OVER);
+			}
+		}
+
+	}
 
 	reset() {
 
@@ -314,9 +321,11 @@ class Game {
 		})
 
 		game.canvas.addEventListener('click', function(e) {
-			game.cloudFactory.generateClouds();
-			game.setState(GAME_PLAYING);
-			game.enemyFactory.createAllEnemies();
+			if(game.getState() === INITIAL) {
+				game.cloudFactory.generateClouds();
+				game.setState(GAME_PLAYING);
+				game.enemyFactory.createAllEnemies();
+			}
 		})
 
 	}

@@ -61,14 +61,15 @@ class Player {
 
 			this.context.save();
 			this.context.beginPath();
-			this.context.arc(this.position.x, this.position.y, this.r, 0, 360 * radian, false);
-			this.context.strokeStyle = 'white';
-			this.context.fillStyle = 'rgba(350, 350, 350, .2)';
-			this.context.lineWidth = 2;
-			this.context.stroke();
-			this.context.fill();
 			this.context.drawImage(this.img, this.x, this.y, this.w, this.h);
+			this.context.restore();
 
+			// this.context.arc(this.position.x, this.position.y, this.r, 0, 360 * radian, false);
+			// this.context.strokeStyle = 'white';
+			// this.context.fillStyle = 'rgba(350, 350, 350, .2)';
+			// this.context.lineWidth = 2;
+			// this.context.stroke();
+			// this.context.fill();
 			// this.context.strokeStyle = 'red';
 			// this.context.beginPath();	
 			// this.context.moveTo(this.hitBox.a.x, this.hitBox.a.y);
@@ -76,8 +77,6 @@ class Player {
 			// this.context.lineTo(this.hitBox.c.x, this.hitBox.c.y);
 			// this.context.lineTo(this.hitBox.a.x, this.hitBox.a.y);
 			// this.context.stroke();
-			
-			this.context.restore();
 		}
 	}
 
