@@ -7,12 +7,17 @@ class EnemyFactory {
 		this.createAllEnemies();
 
 		this.addBlackbird = () => {
-			const enemy = new Enemy('blackbird', this.game);
+			const enemy = new Blackbird(this.game);
 			this.enemies.push(enemy);
 		}
 
+		this.addWhitebird = () => {
+			const enemy = new Whitebird(this.game);
+			this.enemies.push(enemy);
+		}
+		
 		this.addSpacestation = () => {
-			const enemy = new Enemy('spacestation', this.game);
+			const enemy = new SpaceStation(this.game);
 			this.enemies.push(enemy);
 		}
 
@@ -20,6 +25,7 @@ class EnemyFactory {
 
 	createAllEnemies() {
 		setInterval(this.addBlackbird, 4000);
+		setInterval(this.addWhitebird, 2000);
 		setInterval(this.addSpacestation, 10000);
 	}
 }

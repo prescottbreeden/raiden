@@ -5,8 +5,8 @@ window.getRandomInt = (min, max) => {
 }
 
 window.getPosition = (object) => {
-	let x = object.x + object.w/2;
-	let y = object.y + object.h/2;
+	let x = object.x;
+	let y = object.y;
 	return {x: x, y: y}
 }
 

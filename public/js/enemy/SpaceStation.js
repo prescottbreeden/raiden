@@ -1,33 +1,32 @@
-class Blackbird extends Enemy {
+class SpaceStation extends Enemy {
 	constructor(game) {
 		super(game);
 
 		// specs
-		this.tracking = true;
-		this.contain = false;
-		this.spin = false;
-		this.item = false;
-		this.h = 100;
-		this.w = 100;
-		this.r = this.w/2.1;
+		this.tracking = false;
+		this.contain = true;
+		this.spin = true;
+		this.item = true;
+		this.h = 120;
+		this.w = 120;
+		this.r = this.w/2;
 		this.x = getRandomInt(this.canvas.width*.1, this.canvas.width*.9);
 		this.y = -this.h;
-		this.weaponSpeed = 8;
-		this.vy = game.getVelocity() * 8;
-		this.g = -.05;
-		if(this.x >= this.canvas.width/2) {
-			this.vx = 1;
-		} else {
-			this.vx = -1;
-		}
-		this.src = 'public/images/blackbird.png';
+		this.g = 0;
+		this.vy = game.getVelocity() * 2;
+		this.vx = 1; 
+		this.weaponSpeed = 5;
+
+		this.src = 'public/images/spacestation.png';
 		this.img = null;
 		this.weaponType = 'ball';
-		this.fireDelay = 1000;
-		this.hp = 10;
+		this.fireDelay = 2000;
+		this.hp = 100;
 		this.shoot(this.fireDelay);
-		this.shoot(this.fireDelay*2);
+		this.shoot(this.fireDelay);
+		this.shoot(this.fireDelay);
 
+		this.getAngle();
 		this.create();
 	}
 
@@ -65,7 +64,7 @@ class Blackbird extends Enemy {
 
 		if(this.tracking) {
 			this.playerPosition = getPosition(this.game.player);
-			this.angle = Math.atan2(this.playerPosition.y - this.y, this.playerPosition.x - this.x) - 3.141 / 2;
+			this.getAngle();
 			this.context.rotate(this.angle);
 		}
 
