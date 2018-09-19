@@ -5,10 +5,10 @@ class Item {
 		this.context = game.context;
 
 		this.frame = 0;
-		this.types = ['Blue', 'Green', 'Red', 'Yellow'];
+		this.types = ['blaster', 'spread'];
 		this.index = getRandomInt(0, this.types.length);
-		this.color = this.types[this.index];
-		this.src = 'public/images/orbs/'+ this.color + '/frame' + this.frame + '.png';
+		this.prop = this.types[this.index];
+		this.src = 'public/images/orbs/'+ this.prop + '/frame' + this.frame + '.png';
 		this.x = enemy.x;
 		this.y = enemy.y;
 		this.h = 50;
@@ -31,8 +31,8 @@ class Item {
 		setInterval(function() {
 			item.index++;	
 			item.index %= item.types.length;
-			item.color = item.types[item.index];
-		}, 5000);
+			item.prop = item.types[item.index];
+		}, 4000);
 	}
 
 	draw() {
@@ -56,7 +56,7 @@ class Item {
 				this.vx *= -1;
 			}
 			this.context.save();
-			this.img.src = 'public/images/orbs/' + this.color + '/frame' + this.frame + '.png';
+			this.img.src = 'public/images/orbs/' + this.prop + '/frame' + this.frame + '.png';
 			this.context.translate(this.x, this.y);
 			this.context.drawImage(this.img, -(this.w/2), -(this.h/2), this.w, this.h);
 			this.context.restore();

@@ -47,21 +47,22 @@ class Player {
 			this.y += this.vy;
 			this.x += this.vx;
 
-			if(this.y + this.h > this.canvas.height) {
-				this.y = this.canvas.height - this.h;
-			} else if(this.y < 0) {
-				this.y = 0;
+			if(this.y + this.h/2 > this.canvas.height) {
+				this.y = this.canvas.height - this.h/2;
+			} else if(this.y - this.h/2 < 0) {
+				this.y = this.h/2;
 			}
 
-			if(this.x + this.w > this.canvas.width) {
-				this.x = this.canvas.width - this.w;
-			} else if(this.x < 0) {
-				this.x = 0;
+			if(this.x + this.w/2 > this.canvas.width) {
+				this.x = this.canvas.width - this.w/2;
+			} else if(this.x - this.w/2 < 0) {
+				this.x = this.w/2;
 			}
 
 			this.context.save();
+			this.context.translate(this.x, this.y);
 			this.context.beginPath();
-			this.context.drawImage(this.img, this.x, this.y, this.w, this.h);
+			this.context.drawImage(this.img, -(this.w/2), -(this.h/2), this.w, this.h);
 			this.context.restore();
 
 			// this.context.arc(this.position.x, this.position.y, this.r, 0, 360 * radian, false);

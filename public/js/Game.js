@@ -291,7 +291,10 @@ class Game {
 			if(distance < item.w) {
 				console.log('nom nom nom');
 				items.splice(i, 1);
-				
+				this.player.weaponStr += 1;	
+				if(this.player.weaponStr > 6) {
+					this.player.weaponStr = 6;
+				}
 			}
 		}
 	}
@@ -307,7 +310,15 @@ class Game {
 
 
 	shoot() {
-		this.playerFire = setInterval(this.pewpew, 150);
+		console.log(this.player.weaponStr);
+		if(this.player.weaponStr > 5) {
+			this.playerFire = setInterval(this.pewpew, 75);
+		} else if(this.player.weaponStr > 3) {
+			this.playerFire = setInterval(this.pewpew, 100);
+		} else {
+			this.playerFire = setInterval(this.pewpew, 150);
+		}
+
 	}
 
 
