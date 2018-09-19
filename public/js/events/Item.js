@@ -13,6 +13,7 @@ class Item {
 		this.y = enemy.y;
 		this.h = 50;
 		this.w = 50;
+		this.r = this.w/2;
 		this.vx = 2;
 		this.vy = 2;
 

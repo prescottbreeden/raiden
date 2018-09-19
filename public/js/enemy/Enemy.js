@@ -13,6 +13,7 @@ class Enemy {
 			this.tracking = true;
 			this.contain = false;
 			this.spin = false;
+			this.item = false;
 			this.h = 100;
 			this.w = 100;
 			this.r = this.w/2.1;
@@ -39,6 +40,7 @@ class Enemy {
 			this.tracking = false;
 			this.contain = true;
 			this.spin = true;
+			this.item = true;
 			this.h = 120;
 			this.w = 120;
 			this.r = this.w/2;
@@ -53,7 +55,7 @@ class Enemy {
 			this.img = null;
 			this.weaponType = 'ball';
 			this.fireDelay = 2000;
-			this.hp = 500;
+			this.hp = 100;
 			this.shoot(this.fireDelay);
 			this.shoot(this.fireDelay);
 			this.shoot(this.fireDelay);

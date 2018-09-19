@@ -121,6 +121,7 @@ class Game {
 
 		// draw clouds
 		this.checkCollisions();
+		this.checkItemCollection();
 		this.drawClouds();
 		this.drawBullets();
 		this.drawEnemies();
@@ -223,19 +224,24 @@ class Game {
 			for(let j = 0; j < enemies.length; j++) {
 				const enemy = enemies[j];
 				const bullet = bullets[i];
-				if(bullet.class != 'player') { continue; }
-				const checkPlayerBullets = getDistance(enemy, getPosition(bullet));
-				if(checkPlayerBullets < enemy.r) {
-					enemy.hp -= bullet.power;
-					if(enemy.hp <= 0) {
-						const hit = new Audio();
-						hit.src = 'public/music/explosion1.mp3';
-						hit.play();
+				if(bullet) {
+					if(bullet.class != 'player') { continue; }
+					const checkPlayerBullets = getDistance(enemy, getPosition(bullet));
+					if(checkPlayerBullets < enemy.r) {
+						enemy.hp -= bullet.power;
 						bullets.splice(i, 1);
-						this.explosionFactory.generateExplosions(enemy);
-						this.itemFactory.generateItem(enemy);
-						enemies.splice(j, 1);
+						if(enemy.hp <= 0) {
+							if(enemy.item) {
+								this.itemFactory.generateItem(enemy);
+							}
+							const hit = new Audio();
+							hit.src = 'public/music/explosion1.mp3';
+							hit.play();
+							this.explosionFactory.generateExplosions(enemy);
+							enemies.splice(j, 1);
+						}
 					}
+
 				}
 				
 			}
@@ -273,6 +279,20 @@ class Game {
 		for(let i = 0; i < items.length; i++) {
 			const item = items[i];
 			item.draw();
+		}
+	}
+
+
+	checkItemCollection() {
+		const items = this.itemFactory.items;
+		for(let i = 0; i < items.length; i++) {
+			const item = items[i];
+			const distance = getDistance(item, this.player);
+			if(distance < item.w) {
+				console.log('nom nom nom');
+				items.splice(i, 1);
+				
+			}
 		}
 	}
 
