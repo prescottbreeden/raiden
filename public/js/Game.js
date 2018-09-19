@@ -41,7 +41,7 @@ class Game {
 			const pew = new Audio();
 			pew.src = 'public/music/blaster.mp3';
 			pew.play();
-			this.bulletFactory.generateBullets();
+			this.bulletFactory.generatePlayerBullets();
 		}
 
 		// bind event listeners
@@ -180,7 +180,8 @@ class Game {
 	drawBullets() {
 		const bullets = this.bulletFactory.bullets;
 		for(let i = 0; i < bullets.length; i++) {
-			bullets[i].draw();
+			const bullet = bullets[i];
+			bullet.draw();
 		}
 		this.removeExtraBullets();
 	}
@@ -290,6 +291,7 @@ class Game {
 			const distance = getDistance(item, this.player);
 			if(distance < item.w) {
 				console.log('nom nom nom');
+				this.player.weaponType = item.prop;
 				items.splice(i, 1);
 				this.player.weaponStr += 1;	
 				if(this.player.weaponStr > 6) {

@@ -21,7 +21,7 @@ class Enemy {
 			const pew = new Audio();
 			pew.src = 'public/music/retro-shot-blaster.mp3';
 			pew.play();
-			const bullet = new Bullet(game, enemy);
+			const bullet = new Ball(game, enemy);
 			const player = getPosition(game.player);
 			const distance = getDistance(game.player, enemy);
 			bullet.vx = (player.x - enemy.x)/distance*enemy.weaponSpeed;

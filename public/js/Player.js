@@ -13,7 +13,7 @@ class Player {
 		this.vx = 0;
 		this.src = src;
 		this.img = null;
-		this.weaponType = 'blaster';
+		this.weaponType = 'spread';
 		this.weaponStr = 1;
 		this.hitBox = { a: '', b: '', c:'' }
 
