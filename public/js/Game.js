@@ -227,8 +227,9 @@ class Game {
 				const bullet = bullets[i];
 				if(bullet) {
 					if(bullet.class != 'player') { continue; }
-					const checkPlayerBullets = getDistance(enemy, getPosition(bullet));
-					if(checkPlayerBullets < enemy.r) {
+					// as a bullet gets wider, the center has to be moved appropriately for distance
+					const checkPlayerBullets = getPointDistance(enemy.x, enemy.y, bullet.x+bullet.w/2, bullet.y);
+					if(checkPlayerBullets < enemy.r + bullet.w/2) {
 						enemy.hp -= bullet.power;
 						bullets.splice(i, 1);
 						if(enemy.hp <= 0) {

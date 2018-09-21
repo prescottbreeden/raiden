@@ -38,6 +38,15 @@ class Blaster extends Bullet {
 		this.power = ship.weaponStr * 10;
 	}
 
+	drawCenter() {
+		this.context.save();
+		this.context.fillStyle = 'green';
+		this.context.translate(this.x, this.y);
+		this.context.fillRect(this.w/2, 0, this.w/2, this.h);
+		this.context.restore();
+	
+	}
+
 	draw() {
 		this.x += this.vx;
 		this.y += this.vy;

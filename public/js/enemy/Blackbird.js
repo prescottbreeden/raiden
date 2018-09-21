@@ -36,7 +36,9 @@ class Blackbird extends Enemy {
 		this.img.src = this.src;
 	}
 
+
 	draw() {
+		this.drawCenter();
 		this.vy += this.g;
 		this.y += this.vy;
 		this.x += this.vx;

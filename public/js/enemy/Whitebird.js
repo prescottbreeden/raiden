@@ -37,6 +37,7 @@ class Whitebird extends Enemy {
 	}
 
 	draw() {
+		this.drawCenter();
 		this.vy += this.g;
 		this.y += this.vy;
 		this.x += this.vx;
