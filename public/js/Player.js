@@ -72,22 +72,22 @@ class Player {
 			// this.context.stroke();
 			// this.context.fill();
 			
-			this.context.save();
-			this.context.strokeStyle = 'red';
-			this.context.beginPath();	
-			this.context.moveTo(this.hitBox.a.x, this.hitBox.a.y);
-			this.context.lineTo(this.hitBox.b.x, this.hitBox.b.y);
-			this.context.lineTo(this.hitBox.c.x, this.hitBox.c.y);
-			this.context.lineTo(this.hitBox.a.x, this.hitBox.a.y);
-			this.context.stroke();
-			this.context.restore();
+			// this.context.save();
+			// this.context.strokeStyle = 'red';
+			// this.context.beginPath();	
+			// this.context.moveTo(this.hitBox.a.x, this.hitBox.a.y);
+			// this.context.lineTo(this.hitBox.b.x, this.hitBox.b.y);
+			// this.context.lineTo(this.hitBox.c.x, this.hitBox.c.y);
+			// this.context.lineTo(this.hitBox.a.x, this.hitBox.a.y);
+			// this.context.stroke();
+			// this.context.restore();
 
-			this.context.save();
-			this.context.fillStyle = 'rgba(250,250,250,.2)';
-			this.context.translate(this.x, this.y)
-			this.context.fillRect(-(this.w/2), -(this.h/2), this.w, this.h);
-			this.context.fill();
-			this.context.restore();
+			// this.context.save();
+			// this.context.fillStyle = 'rgba(250,250,250,.2)';
+			// this.context.translate(this.x, this.y)
+			// this.context.fillRect(-(this.w/2), -(this.h/2), this.w, this.h);
+			// this.context.fill();
+			// this.context.restore();
 		}
 	}
 
