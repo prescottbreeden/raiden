@@ -12,7 +12,7 @@ class Blackbird extends Enemy {
     this.r = this.w/2.1;
     this.x = getRandomInt(this.canvas.width*.1, this.canvas.width*.9);
     this.y = -this.h;
-    this.weaponSpeed = 8;
+    this.weaponSpeed = game.getVelocity() * 4;
     this.vy = game.getVelocity() * 8;
     this.g = -.05;
     if(this.x >= this.canvas.width/2) {
@@ -48,7 +48,7 @@ class Blackbird extends Enemy {
         this.y = this.canvas.height-this.h;
         this.vy *= -1;
       }
-      if(this.y < this.h/2 && this.vy < 0) { 
+      if(this.y < this.h/2 && this.vy < 0) {
         this.y = this.h/2;
         this.vy *= -1;
       }
@@ -72,7 +72,7 @@ class Blackbird extends Enemy {
     }
 
     if(this.spin) {
-      this.angle+=5; 
+      this.angle += 5;
       this.context.rotate(this.angle);
     }
 

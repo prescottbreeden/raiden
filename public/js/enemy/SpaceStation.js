@@ -15,7 +15,7 @@ class SpaceStation extends Enemy {
     this.g = 0;
     this.vy = game.getVelocity() * 2;
     this.vx = 1; 
-    this.weaponSpeed = 5;
+    this.weaponSpeed = game.getVelocity() * 3;
 
     this.src = 'public/images/spacestation.png';
     this.img = null;

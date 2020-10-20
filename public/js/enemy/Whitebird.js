@@ -12,7 +12,7 @@ class Whitebird extends Enemy {
     this.r = this.w/2.1;
     this.x = getRandomInt(this.canvas.width*.1, this.canvas.width*.9);
     this.y = -this.h;
-    this.weaponSpeed = 8;
+    this.weaponSpeed = game.getVelocity() * 4;
     this.vy = game.getVelocity() * 8;
     this.g = -.05;
     if(this.x >= this.canvas.width/2) {
