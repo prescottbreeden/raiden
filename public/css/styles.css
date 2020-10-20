@@ -1,14 +1,72 @@
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-	font-size: 66.25%;
+  font-size: 66.25%;
 }
 
 body {
-	background-color: lightblue;
+  color: #eee;
+  background-color: #333;
 }
 
-
+.game-container {
+  margin: 0 auto;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 5rem);
+  width: 800px;
+  border: 1px solid #eee;
+}
+.player-bar {
+  padding: 1rem;
+  background-color: #333;
+  width: 800px;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.player-bar-container {
+  width: 33.3%;
+}
+.player-bar__score-container {
+  display: flex;
+  justify-content: center;
+}
+.player-bar__score:not(:last-child) {
+  margin-right: 1rem;
+}
+.player-lives {
+  display: flex;
+  justify-content: flex-end;
+}
+.player-lives--text {
+  margin-right: 1rem;
+}
+.player-ship {
+  height: 2rem;
+}
+.start-btn {
+  background-color: steelblue;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 3px;
+  color: #eee;
+  font-size: 2rem;
+}
+.start-btn:hover {
+  cursor: pointer;
+  background-color: darkred;
+}

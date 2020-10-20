@@ -1,44 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Overhead Shooter</title>
-	<link rel="stylesheet" href="public/css/styles.css">
-</head>
-<body>
-	<canvas id="ctx" class="cavas">
-		Please update your browser... It's very old.
-	</canvas>
+  <head>
+    <meta charset="UTF-8">
+    <title>Overhead Shooter</title>
+    <link rel="stylesheet" href="public/css/styles.css">
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="player-bar">
+        <div class="player-bar-container">
+          <p class="player-bar__title">Raiden Arcade</p>
+        </div>
+        <div class="player-bar-container">
+          <div class="player-bar__score-container">
+            <p class="player-bar__score">Score</p>
+            <p id="player-score" class="player-bar__score">0</p>
+          </div>
+        </div>
+        <div class="player-bar-container">
+          <div class="player-lives"> 
+            <p class="player-lives--text">Lives</p>
+            <img class="player-ship" src="public/images/mship1.png" alt="">
+            <img class="player-ship" src="public/images/mship1.png" alt="">
+            <img class="player-ship" src="public/images/mship1.png" alt="">
+          </div>
+        </div>
+      </div>
+      <div id="game" class="game"></div>
+    </div>
 
 
 
-	<!-- scripts -->
-	<script src="public/js/canvas-script.js"></script>
-	<script src="public/js/utilities.js"></script>
+    <!-- scripts -->
+    <script src="public/js/canvas-script.js"></script>
+    <script src="public/js/utilities.js"></script>
 
-	<!-- game classes -->
-	<script src="public/js/environment/Background.js"></script>
-	<script src="public/js/environment/Cloud.js"></script>
-	<script src="public/js/environment/CloudFactory.js"></script>
-	<script src="public/js/bullets/Bullet.js"></script>
-	<script src="public/js/bullets/Ball.js"></script>
-	<script src="public/js/bullets/Blaster.js"></script>
-	<script src="public/js/bullets/Spread.js"></script>
-	<script src="public/js/bullets/BulletFactory.js"></script>
-	<script src="public/js/events/Explosion.js"></script>
-	<script src="public/js/events/ExplosionFactory.js"></script>
-	<script src="public/js/events/Item.js"></script>
-	<script src="public/js/events/ItemFactory.js"></script>
-	<script src="public/js/enemy/Enemy.js"></script>
-	<script src="public/js/enemy/Blackbird.js"></script>
-	<script src="public/js/enemy/SpaceStation.js"></script>
-	<script src="public/js/enemy/Whitebird.js"></script>
-	<script src="public/js/enemy/Boss.js"></script>
-	<script src="public/js/enemy/EnemyFactory.js"></script>
-	<script src="public/js/Player.js"></script>
-	<script src="public/js/Sound.js"></script>
+    <!-- game classes -->
+    <script src="public/js/environment/Background.js"></script>
+    <script src="public/js/environment/Cloud.js"></script>
+    <script src="public/js/environment/CloudFactory.js"></script>
+    <script src="public/js/bullets/Bullet.js"></script>
+    <script src="public/js/bullets/Ball.js"></script>
+    <script src="public/js/bullets/Blaster.js"></script>
+    <script src="public/js/bullets/Spread.js"></script>
+    <script src="public/js/bullets/BulletFactory.js"></script>
+    <script src="public/js/events/Explosion.js"></script>
+    <script src="public/js/events/ExplosionFactory.js"></script>
+    <script src="public/js/events/Item.js"></script>
+    <script src="public/js/events/ItemFactory.js"></script>
+    <script src="public/js/enemy/Enemy.js"></script>
+    <script src="public/js/enemy/Blackbird.js"></script>
+    <script src="public/js/enemy/SpaceStation.js"></script>
+    <script src="public/js/enemy/Whitebird.js"></script>
+    <script src="public/js/enemy/Boss.js"></script>
+    <script src="public/js/enemy/EnemyFactory.js"></script>
+    <script src="public/js/Player.js"></script>
+    <script src="public/js/Sound.js"></script>
 
-	<!-- game logic -->
-	<script src="public/js/Game.js"></script>
-</body>
+    <!-- game logic -->
+    <script src="public/js/Game.js"></script>
+  </body>
 </html>

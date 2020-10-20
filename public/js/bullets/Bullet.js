@@ -1,13 +1,13 @@
 class Bullet {
-	constructor(game, ship) {
-		this.canvas = game.canvas;
-		this.context = game.context;
-		this.ship = ship;
+  constructor(game, ship) {
+    this.canvas = game.canvas;
+    this.context = game.context;
+    this.ship = ship;
 
-		// specs
-		
-	}
+    // specs
 
-	// functions
-	
+  }
+
+  // functions
+
 }
