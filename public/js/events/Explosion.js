@@ -13,6 +13,7 @@ class Explosion {
     this.vx = enemy.vx;
     this.w = 100;
     this.h = 100;
+    this.id = randomString();
 
     this.create();
   }

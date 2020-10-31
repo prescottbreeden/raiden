@@ -4,6 +4,12 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max-min)) + min;
 }
 
+const randomString = () => {
+  return Math.random()
+    .toString(36)
+    .substring(7);
+}
+
 const isOnScreen = (object) => {
   const { x, y } = object;
   const onScreen = (y > 0 && y < window.innerHeight) && (x > 0 && x < 800);
