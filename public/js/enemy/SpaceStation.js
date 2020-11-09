@@ -22,10 +22,12 @@ class SpaceStation extends Enemy {
     this.weaponType = 'ball';
     this.fireDelay = 2000;
     this.hp = 100;
+    this.shoot(this.fireDelay);
+    this.shoot(this.fireDelay);
+    this.shoot(this.fireDelay);
 
     this.getAngle();
     this.create();
-    this.shoot();
   }
 
   create() {
@@ -74,16 +76,6 @@ class SpaceStation extends Enemy {
 
     this.context.drawImage(this.img, -(this.w/2), -(this.h/2), this.h, this.w);
     this.context.restore();
-  }
 
-  shoot() {
-    function fireBallShot() {
-      if(this.hp <= 0) return;
-      const pew = new Audio();
-      pew.src = 'public/music/retro-shot-blaster.mp3';
-      pew.play();
-      this.game.bulletFactory.ballShot(self);
-    }
-    setInterval(fireBallShot, this.weaponSpeed)
   }
 }

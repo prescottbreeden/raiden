@@ -25,8 +25,9 @@ class Blackbird extends Enemy {
     this.weaponType = 'ball';
     this.fireDelay = 1000;
     this.hp = 10;
+    this.shoot(this.fireDelay);
+    this.shoot(this.fireDelay*2);
 
-    this.shoot();
     this.create();
   }
 
@@ -34,6 +35,7 @@ class Blackbird extends Enemy {
     this.img = new Image();
     this.img.src = this.src;
   }
+
 
   draw() {
     this.drawCenter();
@@ -78,16 +80,4 @@ class Blackbird extends Enemy {
     this.context.restore();
 
   }
-
-  shoot() {
-    function fireBallShot() {
-      if(this.hp <= 0) return;
-      const pew = new Audio();
-      pew.src = 'public/music/retro-shot-blaster.mp3';
-      pew.play();
-      this.game.bulletFactory.ballShot(self);
-    }
-    setInterval(fireBallShot, this.weaponSpeed)
-  }
-
 }

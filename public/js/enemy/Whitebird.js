@@ -25,9 +25,10 @@ class Whitebird extends Enemy {
     this.weaponType = 'ball';
     this.fireDelay = 1000;
     this.hp = 10;
+    this.shoot(this.fireDelay);
+    this.shoot(this.fireDelay*2);
 
     this.create();
-    this.shoot();
   }
 
   create() {
@@ -76,16 +77,6 @@ class Whitebird extends Enemy {
 
     this.context.drawImage(this.img, -(this.w/2), -(this.h/2), this.h, this.w);
     this.context.restore();
-  }
 
-  shoot() {
-    function fireBallShot() {
-      if(this.hp <= 0) return;
-      const pew = new Audio();
-      pew.src = 'public/music/retro-shot-blaster.mp3';
-      pew.play();
-      this.game.bulletFactory.ballShot(self);
-    }
-    setInterval(fireBallShot, this.weaponSpeed, this)
   }
 }

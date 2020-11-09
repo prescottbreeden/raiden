@@ -11,15 +11,6 @@ class BulletFactory {
     const cleanUp = this.bullets.filter(isOnScreen);
     this.bullets = [...cleanUp, ...bullets];
   }
-  // BALLS
-  ballShot = (enemy) => {
-    const bullet = new Ball(this.game, enemy);
-    const player = getPosition(self.game.player);
-    const distance = getDistance(self.game.player, enemy);
-    bullet.vx = (player.x - enemy.x)/distance * enemy.weaponSpeed;
-    bullet.vy = (player.y - enemy.y)/distance * enemy.weaponSpeed;
-    this.addBullets(bullet);
-  }
 
   // BLASTER
   blasterShot = () => {
@@ -45,7 +36,7 @@ class BulletFactory {
       this.addBullets(bullet5, bullet6);
     }
     if(this.ship.weaponStr > 3) {
-      // console.log('now the tricky part');
+      console.log('now the tricky part');
     }
   }
   generatePlayerBullets() {

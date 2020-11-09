@@ -24,13 +24,6 @@ class Game {
     this.canvas = canvas;
     this.context = this.canvas.getContext('2d');
 
-    this.cloudFactory = new CloudFactory(this.canvas);
-    this.player = new Player('public/images/mship1.png', this.canvas);
-    this.bulletFactory = new BulletFactory(this, this.player);
-    this.enemyFactory = new EnemyFactory(this);
-    this.explosionFactory = new ExplosionFactory(this);
-    this.itemFactory = new ItemFactory(this);
-
     // bind event listeners
     this.bindEvents();
   }
@@ -47,6 +40,7 @@ class Game {
   setScore = (score) => this._score += score;
 
   pewpew = () => {
+    console.log('pew pew');
     const pew = new Audio();
     pew.src = 'public/music/blaster.mp3';
     pew.play();
@@ -55,10 +49,8 @@ class Game {
 
 
   start() {
-    this.setState(GAME_PLAYING);
+    this.createObjects();
     this.runGameLoop();
-    this.cloudFactory.generateClouds();
-    this.enemyFactory.createAllEnemies();
   }
 
 
@@ -77,6 +69,16 @@ class Game {
     window.requestAnimationFrame(() => {
       this.runGameLoop();
     })
+  }
+
+
+  createObjects() {
+    this.cloudFactory = new CloudFactory(this.canvas);
+    this.player = new Player('public/images/mship1.png', this.canvas);
+    this.bulletFactory = new BulletFactory(this, this.player);
+    this.enemyFactory = new EnemyFactory(this);
+    this.explosionFactory = new ExplosionFactory(this);
+    this.itemFactory = new ItemFactory(this);
   }
 
 
@@ -246,6 +248,7 @@ class Game {
       const item = items[i];
       const distance = getDistance(item, this.player);
       if(distance < item.w) {
+        console.log('nom nom nom');
         this.player.weaponType = item.prop;
         items.splice(i, 1);
         this.player.weaponStr += 1;	
@@ -330,6 +333,9 @@ class Game {
 
     game.canvas.addEventListener('click', function(e) {
       if(game.getState() === INITIAL) {
+        game.cloudFactory.generateClouds();
+        game.setState(GAME_PLAYING);
+        game.enemyFactory.createAllEnemies();
       }
     })
 
