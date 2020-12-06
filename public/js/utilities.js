@@ -6,7 +6,7 @@ const getRandomInt = (min, max) => {
 
 const isOnScreen = (object) => {
   const { x, y } = object;
-  const onScreen = (y > 0 && y < window.innerHeight) && (x > 0 && x < 800);
+  const onScreen = (y > -200 && y < window.innerHeight + 200) && (x > -200 && x < 1000);
   return onScreen;
 }
 
